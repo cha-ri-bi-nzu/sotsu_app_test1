@@ -24,6 +24,7 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'spring'
   gem 'letter_opener_web'
+  gem 'pry-rails'
 end
 
 group :test do
@@ -37,3 +38,4 @@ gem 'devise'
 gem 'rexml'
 gem 'devise-i18n'
 gem 'active_hash'
+gem "rails-i18n"

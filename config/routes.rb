@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :groups
   resources :shifts
   devise_for :users
-  root 'blogs#index'
+  root 'shifts#index'
   resources :blogs
   
   if Rails.env.development?

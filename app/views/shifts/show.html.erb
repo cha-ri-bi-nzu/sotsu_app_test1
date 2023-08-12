@@ -1,24 +1,48 @@
-<p id="notice"><%= notice %></p>
+<h4><%= @month %><%#= @shift.working_day.month #%>月</h4>
 
-<p>
-  <strong>Working day:</strong>
-  <%= @shift.working_day %>
-</p>
+<table border>
+  <thead>
+    <tr>
+      <th colspan="1"></th>
+      <% @days.each do |day| %>
+        <th><%= day.mday %></th>
+      <% end %>
+      <th colspan="3">勤怠情報</th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>User:</strong>
-  <%= @shift.user_id %>
-</p>
+  <tbody>
+    <tr>
+      <td>氏名</td>
+      <% @days.each do |day| %>
+        <td><%= t("date.abbr_day_names")[day.wday] %></td>
+      <% end %>
+      <td>出勤</td>
+      <td>休日</td>
+      <td>総勤務時間</td>
+    </tr>
+    <% @group_users.each do |user| %>
+      <% month_working_times = 0 %>
+      <% work_days = 0 %>
+      <% holidays = 0 %>
+      <tr>
+        <td><%= user.name %></td>
+        <% @shifts.each do |shift| %>
+          <% if shift.user_id == user.id %>
+            <td><%= shift.working_status.status %></td>
+            <% month_working_times += shift.working_status.working_times %>
+            <% work_days += 1 if shift.working_status.id == 1 %>
+            <% holidays += 1 if shift.working_status.id == 3 %>
+          <% end %>
+        <% end %>
+        <td><%= work_days %></td>
+        <td><%= holidays %></td>
+        <td><%= month_working_times %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<p>
-  <strong>Working status:</strong>
-  <%= @shift.working_status_id %>
-</p>
 
-<p>
-  <strong>Working time:</strong>
-  <%= @shift.working_time %>
-</p>
-
-<%= link_to 'Edit', edit_shift_path(@shift) %> |
+<%= link_to 'Edit', edit_shift_path(@shifts) %> |
 <%= link_to 'Back', shifts_path %>

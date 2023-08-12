@@ -1,4 +1,4 @@
-<%= form_with(model: shift) do |form| %>
+<%= form_with(model: @shift) do |form| %>
   <% if shift.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
@@ -10,26 +10,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :working_day %>
-    <%= form.date_select :working_day %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :working_status_id %>
-    <%= form.number_field :working_status_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :working_time %>
-    <%= form.time_select :working_time %>
-  </div>
 
   <div class="actions">
     <%= form.submit %>
